@@ -1,0 +1,36 @@
+spring:
+  #db配置
+  datasource:
+    url: jdbc:mysql://127.0.0.1/microservices?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+  #ָ指定使用哪个配置文件
+  profiles:
+    active: test
+#别名配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.regino.pojo
+#---
+##开发环境
+#server:
+#  port: 8081
+#spring:
+#  profiles: dev
+#---
+##测试环境
+#server:
+#  port: 8082
+#spring:
+#  profiles: test
+#---
+##生成环境
+#server:
+#  port: 8083
+#spring:
+#  profiles: prod
+#---
+#spring:
+#  profiles:
+#    active: test
