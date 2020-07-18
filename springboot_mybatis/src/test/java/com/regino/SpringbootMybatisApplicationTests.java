@@ -35,5 +35,4 @@ public class SpringbootMybatisApplicationTests {
         List list = restTemplate.getForObject("http://localhost:8082/findAll", List.class);
         System.out.println(list);
     }
-
 }
