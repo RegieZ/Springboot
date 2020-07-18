@@ -1,0 +1,13 @@
+server:
+  port: 9091
+spring:
+  application:
+    name: springcloud_user_service
+  datasource:
+    url: jdbc:mysql://127.0.0.1/microservices?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.regino.pojo
