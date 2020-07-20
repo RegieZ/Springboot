@@ -1,0 +1,13 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: springcloud_eureka_server
+  main:
+    allow-bean-definition-overriding: true #遇到相同名字时，是否允许覆盖
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka #注册中心地址
+    register-with-eureka: false #是否注册到eureka注册中心
+    fetch-registry: false #是否从注册中心拉取注册列表
