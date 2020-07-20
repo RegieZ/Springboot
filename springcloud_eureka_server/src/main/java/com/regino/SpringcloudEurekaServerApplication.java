@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @SpringBootApplication
-@EnableEurekaServer //声明是一个eureka服务
+@EnableEurekaServer //声明是一个eureka服务，会创建Marker.class
 public class SpringcloudEurekaServerApplication {
 
     public static void main(String[] args) {
