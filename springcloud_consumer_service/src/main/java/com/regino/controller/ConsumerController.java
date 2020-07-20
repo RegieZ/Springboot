@@ -2,11 +2,15 @@ package com.regino.controller;
 
 import com.regino.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("consumer")
@@ -14,6 +18,9 @@ public class ConsumerController {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
     /**
      * @Date: 11:48 2020/7/17
@@ -32,5 +39,14 @@ public class ConsumerController {
         String url = "http://localhost:9091/user/findUserById/" + id;
         User user = restTemplate.getForObject(url, User.class);
         return user;
+    }
+
+    /*
+        返回服务列表
+     */
+    @GetMapping("/getInstance")
+    public List<ServiceInstance> getInstance(){
+        List<ServiceInstance> instances = discoveryClient.getInstances("SPRINGCLOUD_USER_SERVICE");
+        return instances;
     }
 }
