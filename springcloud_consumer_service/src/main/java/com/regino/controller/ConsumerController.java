@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -37,9 +36,15 @@ public class ConsumerController {
             2.负载均衡问题 --> springcloud ribbon（负载均衡器）
             3.无法感知调用服务的状态 --> springcloud hystrix（熔断器）
          */
-        List<ServiceInstance> instances = discoveryClient.getInstances("SPRINGCLOUD_USER_SERVICE");
+
+        /*String url = "http://localhost:9091/user/findUserById/" + id;*/
+
+        /*List<ServiceInstance> instances = discoveryClient.getInstances("SPRINGCLOUD_USER_SERVICE");
         URI uri = instances.get(0).getUri();
-        String url = uri + "/user/findUserById/" + id;
+        String url = uri + "/user/findUserById/" + id;*/
+
+        String url = "http://springcloud_user_service/user/findUserById/" + id;
+
         User user = restTemplate.getForObject(url, User.class);
         return user;
     }
