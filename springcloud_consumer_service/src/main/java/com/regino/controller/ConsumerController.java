@@ -1,7 +1,7 @@
 package com.regino.controller;
 
-import com.regino.pojo.User;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.regino.pojo.User;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("consumer")
+@DefaultProperties(defaultFallback = "defaultMethod") //声明当前类默认熔断方法
 public class ConsumerController {
 
     @Autowired
@@ -25,7 +26,8 @@ public class ConsumerController {
     private DiscoveryClient discoveryClient;
 
     @GetMapping("findUserById/{id}")
-    @HystrixCommand(fallbackMethod = "fallbackMethod") //声明默认失败方法
+    //@HystrixCommand(fallbackMethod = "fallbackMethod") //声明默认失败方法
+    @HystrixCommand
     public User findUserById(@PathVariable("id") Integer id) {
 
         /*
@@ -43,6 +45,17 @@ public class ConsumerController {
         String url = "http://springcloud_user_service/user/findUserById/" + id;
 
         User user = restTemplate.getForObject(url, User.class);
+        return user;
+    }
+
+    /*
+        当前类默认熔断方法：
+            1.返回值类型必须相同
+            2.不能带参数
+     */
+    public User defaultMethod(){
+        User user = new User();
+        user.setNote("当前类默认熔断方法");
         return user;
     }
 
