@@ -26,6 +26,11 @@ public class UserController {
     // @PathVariable
     @GetMapping("findUserById/{id}")
     public User findUserbyId(@PathVariable("id") Integer id) {
+        /*try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
         User user = userService.findUserById(id);
         user.setNote("生产者端口号是: " + port);
         return user;
