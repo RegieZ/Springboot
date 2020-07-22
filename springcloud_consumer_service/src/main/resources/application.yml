@@ -11,6 +11,7 @@ eureka:
 springcloud_consumer_service:
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
 # 配置熔断策略：
 hystrix:
   command:
@@ -24,3 +25,9 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 1000 #熔断超时设置，默认为1秒
+#暴露所有监控信息
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' #*在yml中代表特殊符号，需要用单引号
