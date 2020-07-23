@@ -1,6 +1,7 @@
 package com.regino.controller;
 
 import com.regino.pojo.User;
+import com.regino.service.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -20,7 +21,7 @@ public class ConsumerController {
     private RestTemplate restTemplate;
 
     @Autowired
-    private DiscoveryClient discoveryClient;
+    private ConsumerService consumerService;
 
     @GetMapping("findUserById/{id}")
     //@HystrixCommand(fallbackMethod = "fallbackMethod") //声明默认失败方法
@@ -38,9 +39,10 @@ public class ConsumerController {
         URI uri = instances.get(0).getUri();
         String url = uri + "/user/findUserById/" + id;*/
 
-        String url = "http://springcloud-user-service/user/findUserById/" + id;
+        /*String url = "http://springcloud-user-service/user/findUserById/" + id;
+        User user = restTemplate.getForObject(url, User.class);*/
 
-        User user = restTemplate.getForObject(url, User.class);
+        User user = consumerService.findUserById(id);
         return user;
     }
 }
