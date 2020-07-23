@@ -2,7 +2,7 @@
 #  port: 8760
 #spring:
 #  application:
-#    name: eureka_server
+#    name: eureka-server
 #  main:
 #    allow-bean-definition-overriding: true #遇到相同名字时，是否允许覆盖
 #eureka:

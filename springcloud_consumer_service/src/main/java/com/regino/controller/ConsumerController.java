@@ -42,7 +42,7 @@ public class ConsumerController {
         URI uri = instances.get(0).getUri();
         String url = uri + "/user/findUserById/" + id;*/
 
-        String url = "http://springcloud_user_service/user/findUserById/" + id;
+        String url = "http://springcloud-user-service/user/findUserById/" + id;
 
         User user = restTemplate.getForObject(url, User.class);
         return user;
@@ -77,7 +77,7 @@ public class ConsumerController {
      */
     @GetMapping("/getInstance")
     public List<ServiceInstance> getInstance() {
-        List<ServiceInstance> instances = discoveryClient.getInstances("SPRINGCLOUD_USER_SERVICE");
+        List<ServiceInstance> instances = discoveryClient.getInstances("SPRINGCLOUD-USER-SERVICE");
         return instances;
     }
 }

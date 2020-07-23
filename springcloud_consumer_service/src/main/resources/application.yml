@@ -2,7 +2,7 @@ server:
   port: 9095
 spring:
   application:
-    name: springcloud_consumer_service
+    name: springcloud-consumer-service
 eureka:
   client:
     service-url:

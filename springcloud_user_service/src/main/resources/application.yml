@@ -2,7 +2,7 @@ server:
   port: 9091
 spring:
   application:
-    name: springcloud_user_service
+    name: springcloud-user-service
   datasource:
     url: jdbc:mysql://127.0.0.1/microservices?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
