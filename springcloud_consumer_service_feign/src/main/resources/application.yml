@@ -7,3 +7,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka1:8761/eureka, http://eureka2:8762/eureka #注册中心地址
+feign:
+  hystrix:
+    enabled: true #开启feign熔断器支持
