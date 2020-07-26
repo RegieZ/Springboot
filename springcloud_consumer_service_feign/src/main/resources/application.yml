@@ -18,3 +18,7 @@ feign:
       min-request-size: 2048 #超过2MB才压缩
     response:
       enabled: true
+#声明日志级别
+logging:
+  level:
+    com.regino: debug
