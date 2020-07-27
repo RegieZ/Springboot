@@ -10,6 +10,12 @@ spring:
           #断言 /** 表示拦截所有请求路由到 http://127.0.0.1:8081
           predicates:
             - Path=/** # 固定格式，加=
+          #gateway自带过滤器
+          filters:
+            #添加前缀
+            - PrefixPath=/consumer/consumer
+            #去除前缀
+            - StripPrefix=2
 #        - id: user-service-route
 #            uri: http://127.0.0.1:9091
 #            #断言 /** 表示拦截所有请求路由到 http://127.0.0.1:8081
