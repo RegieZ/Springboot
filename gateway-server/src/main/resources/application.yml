@@ -5,10 +5,16 @@ spring:
     gateway:
       routes:
         - id: consumer-service-route # -代表一个对象
-          uri: http://127.0.0.1:8081
+          #lb协议可以从eureka注册中心获取服务列表，获取到后使用负载均衡来访问（ribbon）
+          uri: lb://consumer-service-feign
           #断言 /** 表示拦截所有请求路由到 http://127.0.0.1:8081
           predicates:
-            - Path=/** # 固定格式
+            - Path=/** # 固定格式，加=
+#        - id: user-service-route
+#            uri: http://127.0.0.1:9091
+#            #断言 /** 表示拦截所有请求路由到 http://127.0.0.1:8081
+#            predicates:
+#              - Path=/user/**
 server:
   port: 10010
 eureka:

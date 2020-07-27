@@ -3,15 +3,12 @@ package com.regino.controller;
 import com.regino.pojo.User;
 import com.regino.service.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("consumer")
@@ -22,6 +19,9 @@ public class ConsumerController {
 
     @Autowired
     private ConsumerService consumerService;
+
+    @Value("${server.port}")
+    private String port;
 
     @GetMapping("findUserById/{id}")
     //@HystrixCommand(fallbackMethod = "fallbackMethod") //声明默认失败方法
@@ -43,6 +43,7 @@ public class ConsumerController {
         User user = restTemplate.getForObject(url, User.class);*/
 
         User user = consumerService.findUserById(id);
+        user.setNote(user.getNote() + "消费者端口号：" + port);
         return user;
     }
 }
