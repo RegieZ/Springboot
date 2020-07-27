@@ -1,6 +1,6 @@
 package com.regino.service;
 
-import com.config.FeignLogConfig;
+import com.regino.config.FeignLogConfig;
 import com.regino.pojo.User;
 import com.regino.service.impl.ConsumerServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
