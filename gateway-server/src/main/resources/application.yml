@@ -16,6 +16,7 @@ spring:
             - PrefixPath=/consumer/consumer
             #去除前缀
             - StripPrefix=2
+            - AddResponseHeader=author,reggie #在响应头中添加，名为author，值为reggie
 #        - id: user-service-route
 #            uri: http://127.0.0.1:9091
 #            #断言 /** 表示拦截所有请求路由到 http://127.0.0.1:8081
