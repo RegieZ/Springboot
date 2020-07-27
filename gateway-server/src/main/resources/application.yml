@@ -1,6 +1,14 @@
 spring:
   application:
     name: gateway-server
+  cloud:
+    gateway:
+      routes:
+        - id: consumer-service-route # -代表一个对象
+          uri: http://127.0.0.1:8081
+          #断言 /** 表示拦截所有请求路由到 http://127.0.0.1:8081
+          predicates:
+            - Path=/** # 固定格式
 server:
   port: 10010
 eureka:
