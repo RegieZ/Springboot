@@ -11,6 +11,11 @@ spring:
       discovery:
         enabled: true #使用配置中心
         service-id: config-server #配置中心应用名称
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh #必须写refresh
     #从配置中心中获取
 #  datasource:
 #    url: jdbc:mysql://127.0.0.1/microservices?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
