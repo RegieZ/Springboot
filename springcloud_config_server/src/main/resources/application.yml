@@ -9,10 +9,21 @@ spring:
           #如果创建的git仓库是私有的需要配置用户名和密码
           #username:
           #password:
+  rabbitmq:
+    host: 192.168.200.132 #虚拟机地址
+    #以下有默认值
+    #port: 5672
+    #username: guest
+    #password: guest
 server:
   port: 1200
 eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh #暴露刷新地址
 

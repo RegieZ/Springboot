@@ -11,6 +11,12 @@ spring:
       discovery:
         enabled: true #使用配置中心
         service-id: config-server #配置中心应用名称
+  rabbitmq:
+    host: 192.168.200.132 #虚拟机地址
+    #以下有默认值
+    #port: 5672
+    #username: guest
+    #password: guest
 management:
   endpoints:
     web:
