@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: config-server
+  cloud: #配置git地址
+    config:
+      server:
+        git:
+          uri: https://github.com/RegieZ/Springboot-config-server.git
+          #如果创建的git仓库是私有的需要配置用户名和密码
+          #username:
+          #password:
+server:
+  port: 1200
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
