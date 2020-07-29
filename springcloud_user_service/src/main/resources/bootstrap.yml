@@ -1,0 +1,26 @@
+server:
+  port: 9091 #bootstrap优先级比git高，也比idea配置的优先级高，所以不应把端口号提到git上，否则调用多个端口会有端口冲突
+spring:
+  application:
+    name: springcloud-user-service
+  Cloud:
+    config:
+      name: user #与git上的配置文件名称前半部分一致
+      profile: dev #指定使用的配置文件环境
+      label: master #指定git分支
+      discovery:
+        enabled: true #使用配置中心
+        service-id: config-server #配置中心应用名称
+    #从配置中心中获取
+#  datasource:
+#    url: jdbc:mysql://127.0.0.1/microservices?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: root
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.regino.pojo
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://eureka1:8761/eureka,http://eureka2:8762/eureka #注册中心地址
