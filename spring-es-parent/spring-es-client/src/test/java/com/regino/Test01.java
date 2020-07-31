@@ -42,10 +42,10 @@ public class Test01 {
     @Test
     public void createDoc() {
         //1.创建json数据
-        Product product = new Product(2L, "苹果手机", "手机", "苹果", 1999.00, "http://www.apple.com");
+        Product product = new Product(2L, "苹果手机", "手机", "苹果", 1999.00, "http://www.apple.com");//这里的id是_sourceID
         String json = JSON.toJSONString(product);
         //2.创建请求对象
-        IndexRequest indexRequest = new IndexRequest("reggie", "product", "1");
+        IndexRequest indexRequest = new IndexRequest("reggie", "product", "1");//这里的id是_id
         //3.封装请求数据至请求对象
         indexRequest.source(json, XContentType.JSON);
         //4.使用client进行传输
