@@ -59,7 +59,7 @@ public class Test02 {
         searchSourceBuilder.query(queryBuilder);
 
         //source过滤
-        //searchSourceBuilder.fetchSource(new String[]{"price"}, new String[]{"title", "price"});
+        searchSourceBuilder.fetchSource(new String[]{"title", "price"}, new String[]{"brand"});
 
         //排序
         //  第一个参数指定排序字段
