@@ -6,6 +6,6 @@ spring:
   #配置es连接信息
   data:
     elasticsearch:
-      cluster-name: es #集群名称
+      cluster-name: myCluster #集群名称
       cluster-nodes: 127.0.0.1:9300 #节点信息 tcp端口
       #192.168.200.128:9301,192.168.200.128:9302,192.168.200.128:9303

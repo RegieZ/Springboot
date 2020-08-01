@@ -8,6 +8,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -96,6 +100,41 @@ public class SpringBootEsApplicationTests {
         //3.解析结果
         for (Goods goods : search) {
             System.out.println("查询结果：" + goods);
+        }
+    }
+
+    //分页+排序
+    @Test
+    public void sesarchPageAndSort() {
+        //创建排序对象
+        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        //创建分页排序对象
+        /*
+            第一个参数：页数。0-->第一页，1--->第二页，以此类推
+            第二个参数：页大小
+         */
+        Pageable pageable = PageRequest.of(0, 2, sort);
+        Page<Goods> page = goodRepository.search(QueryBuilders.matchAllQuery(), pageable);
+        //解析结果
+        //结果总数
+        long totalElements = page.getTotalElements();
+        System.out.println("总数： " + totalElements);
+        //总页数
+        int totalPages = page.getTotalPages();
+        System.out.println("总页数： " + totalPages);
+        //数据
+        List<Goods> goodsList = page.getContent();
+        for (Goods goods : goodsList) {
+            System.out.println("查询结果数据：" + goods);
+        }
+    }
+
+    //根据价格范围查询
+    @Test
+    public void findByPrice () {
+        List<Goods> byPriceBetween = goodRepository.findByPriceBetween(20001.00, 20006.00);
+        for (Goods goods : byPriceBetween) {
+            System.out.println(goods);
         }
     }
 }

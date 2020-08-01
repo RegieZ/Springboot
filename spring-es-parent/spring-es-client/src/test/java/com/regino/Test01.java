@@ -123,7 +123,12 @@ public class Test01 {
     //删除与根据id查询类似
     @Test
     public void delDocById() {
-        DeleteRequest deleteRequest = new DeleteRequest();
+        DeleteRequest deleteRequest = new DeleteRequest("reggie", "product", "1");
+        try {
+            client.delete(deleteRequest, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //关闭客户端
