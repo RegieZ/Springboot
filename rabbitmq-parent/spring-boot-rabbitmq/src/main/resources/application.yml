@@ -1,0 +1,8 @@
+spring:
+  rabbitmq:
+    host: 192.168.200.132 #Linux IP
+    #port默认值5672可省略，username和password可省略
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
