@@ -39,4 +39,19 @@ public class ProductController {
     public void sendDirectMsg(@PathVariable String routingKey, @PathVariable String msg) {
         rabbitTemplate.convertAndSend("direct_ex", routingKey, msg);
     }
+
+    //发送topic消息
+    @GetMapping("sendTopicMsg/{routingKey}/{msg}")
+    public void sendTopicMsg(@PathVariable String routingKey, @PathVariable String msg) {
+        rabbitTemplate.convertAndSend("topic_ex", routingKey, msg);
+    }
+
+    //发送消息通用方法
+    //如果是其他的exchange，消息会经过exchange后丢失，不会进入queue
+    @GetMapping("sendMsg/{exchange}/{routingKey}/{msg}")
+    public void sendTopicMsg(@PathVariable String exchange,
+                             @PathVariable String routingKey,
+                             @PathVariable String msg) {
+        rabbitTemplate.convertAndSend(exchange, routingKey, msg);
+    }
 }
