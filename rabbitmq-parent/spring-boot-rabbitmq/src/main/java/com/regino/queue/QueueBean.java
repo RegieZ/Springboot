@@ -1,9 +1,6 @@
 package com.regino.queue;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -44,5 +41,35 @@ public class QueueBean {
     @Bean
     Binding bindingFanoutB(FanoutExchange fanoutExchange, Queue fanoutB){//参数前后壳换
         return BindingBuilder.bind(fanoutB).to(fanoutExchange);
+    }
+
+    //发布订阅模式 direct exchange，direct A 队列
+    @Bean
+    public Queue directA(){
+        return new Queue("direct.A");
+    }
+
+    //发布订阅模式 direct exchange，direct A 队列
+    @Bean
+    public Queue directB(){
+        return new Queue("direct.B");
+    }
+
+    //创建direct exchange
+    @Bean
+    public DirectExchange directExchange(){
+        return new DirectExchange("direct_ex");
+    }
+
+    //绑定
+    @Bean
+    Binding bindingDirectA(DirectExchange directExchange, Queue directA){//参数前后壳换
+        return BindingBuilder.bind(directA).to(directExchange).with("One");
+    }
+
+    //绑定
+    @Bean
+    Binding bindingDirectB(DirectExchange directExchange, Queue directB){//参数前后壳换
+        return BindingBuilder.bind(directB).to(directExchange).with("Two");
     }
 }

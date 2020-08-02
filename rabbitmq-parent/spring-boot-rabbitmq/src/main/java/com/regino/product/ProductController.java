@@ -31,6 +31,12 @@ public class ProductController {
     //发送fanout广播类型消息
     @GetMapping("sendFanoutMsg/{msg}")
     public void sendFanoutMsg(@PathVariable String msg) {
-        rabbitTemplate.convertAndSend("fanout_ex", "", msg);
+        rabbitTemplate.convertAndSend("fanout_ex", "", msg);//fanout模式下无routingKey，但routingKey不为空
+    }
+
+    //发送direct消息
+    @GetMapping("sendDirectMsg/{routingKey}/{msg}")
+    public void sendDirectMsg(@PathVariable String routingKey, @PathVariable String msg) {
+        rabbitTemplate.convertAndSend("direct_ex", routingKey, msg);
     }
 }
