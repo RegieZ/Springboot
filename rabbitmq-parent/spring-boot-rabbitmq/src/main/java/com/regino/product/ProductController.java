@@ -27,4 +27,10 @@ public class ProductController {
         user.setAge(18);
         rabbitTemplate.convertAndSend("simple_queue", user);//简单模式下，routingKey就是队列名称
     }
+
+    //发送fanout广播类型消息
+    @GetMapping("sendFanoutMsg/{msg}")
+    public void sendFanoutMsg(@PathVariable String msg) {
+        rabbitTemplate.convertAndSend("fanout_ex", "", msg);
+    }
 }
