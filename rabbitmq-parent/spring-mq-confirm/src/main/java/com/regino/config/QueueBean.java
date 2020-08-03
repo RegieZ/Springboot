@@ -65,6 +65,16 @@ public class QueueBean {
         //设置routingKey
         map.put("x-dead-letter-routing-key", "order_del");
         return new Queue("order.B", true, false, false, map);
+        /*
+        消息幂等问题
+            SELECT * FROM `account`;
+
+            #朱某账户未处理sql
+            UPDATE account SET money=money+1000 WHERE id =1;
+
+            #乐观锁-->保证了只会执行一遍
+            UPDATE account SET money=money+1000,version=version+1 WHERE id =1 AND version=1
+        */
     }
 
     //一个交换机可以绑定多个队列
