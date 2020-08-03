@@ -31,6 +31,8 @@ public class OrderConsumer {
             if (msg.contains("reggie")) {
                 throw new RuntimeException("NoAuthorName");
             }
+            //为了测试限流所以模拟休息5秒
+            Thread.sleep(5000);
             log.info("下单消息: {}", msg); //{}表示占位符，多个占位符后面可以加多个逗号隔开
             //调用ack发送消息确认信息将消息从队列中移除，multiple代表是否批量删除
             channel.basicAck(deliveryTag, false);

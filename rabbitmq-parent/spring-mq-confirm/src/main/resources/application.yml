@@ -9,4 +9,5 @@ spring:
     publisher-returns: true #开启return
     listener:
       simple:
-        acknowledge-mode: manual
+        acknowledge-mode: manual #开启手动确认模式
+        prefetch: 1 #设置拉取消息总量为1
