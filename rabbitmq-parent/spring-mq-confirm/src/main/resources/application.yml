@@ -7,3 +7,6 @@ spring:
     virtual-host: /
     publisher-confirms: true #开启confirm
     publisher-returns: true #开启return
+    listener:
+      simple:
+        acknowledge-mode: manual
