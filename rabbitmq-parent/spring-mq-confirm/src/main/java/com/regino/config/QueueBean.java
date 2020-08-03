@@ -19,7 +19,7 @@ public class QueueBean {
      */
     @Bean
     public Queue orderA() {
-        return new Queue("orderA", true, false, false);
+        return new Queue("order.A", true, false, false);
     }
 
     /*
