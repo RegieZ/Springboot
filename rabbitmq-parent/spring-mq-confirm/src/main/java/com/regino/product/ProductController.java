@@ -16,7 +16,7 @@ public class ProductController {
     //如果是其他的exchange，消息会经过exchange后丢失，不会进入queue
     @GetMapping("sendMsg/{exchange}/{routingKey}/{msg}")
     public void sendTopicMsg(@PathVariable String exchange,
-                             @PathVariable String routingKey,
+                             @PathVariable String routingKey, //routingKey不是queue的名称
                              @PathVariable String msg) {
         rabbitTemplate.convertAndSend(exchange, routingKey, msg);
     }
