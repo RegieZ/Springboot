@@ -57,14 +57,37 @@ public class QueueBean {
     public Queue orderB() {
         Map<String, Object> map = new HashMap<>();
         //5000单位毫秒，表示5秒后过期
-        map.put("x-msg-t1", 5000);
+        map.put("x-message-tt1", 5000);
+        //过期后发送到死信交换机，然后根据routingKey录入到死信队列中
+        //队列一旦创建后不可以修改，使用的orderB队列做了修改，所以需要在RabbitMQ中删除orderB重新创建
+        //设置死信交换机
+        map.put("x-dead-letter-exchange", "order_del_ex");
+        //设置routingKey
+        map.put("x-dead-letter-routing-key", "order_del");
         return new Queue("order.B", true, false, false, map);
     }
 
     //一个交换机可以绑定多个队列
     @Bean
-        //Binding bindingOrderA(DirectExchange directExchange, Queue orderA){
+    //Binding bindingOrderA(DirectExchange directExchange, Queue orderA){
     Binding bindingOrderB(@Qualifier("directExchange") DirectExchange direct, Queue orderB) {
         return BindingBuilder.bind(orderB).to(direct).with("orderB"); //routingKey也是路由键
+    }
+
+    //创建死信队列
+    @Bean
+    public Queue delQueue() {
+        return new Queue("order_del_queue");
+    }
+
+    //创建死信交换机
+    @Bean
+    public DirectExchange delDirectExchange() {
+        return new DirectExchange("order_del_ex");
+    }
+
+    @Bean
+    Binding bindingDelQueue(DirectExchange delDirectExchange, Queue delQueue) {
+        return BindingBuilder.bind(delQueue).to(delDirectExchange).with("order_del");
     }
 }
