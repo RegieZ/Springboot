@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-@RabbitListener(queues = "order.A") //指定监听队列名称
+@RabbitListener(queues = "order.A") //指定监听队列名称，不指定listener说明没有消费者去消费mq中的消息
 @Slf4j //异步打印，不保证顺序
 public class OrderConsumer {
 

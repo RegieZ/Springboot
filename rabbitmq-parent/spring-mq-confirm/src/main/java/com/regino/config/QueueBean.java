@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Configuration
 public class QueueBean {
 
@@ -46,7 +49,22 @@ public class QueueBean {
      */
     @Bean
     //Binding bindingOrderA(DirectExchange directExchange, Queue orderA){
-    Binding bindingOrderA(@Qualifier("directExchange") DirectExchange direct, Queue orderA){
+    Binding bindingOrderA(@Qualifier("directExchange") DirectExchange direct, Queue orderA) {
         return BindingBuilder.bind(orderA).to(direct).with("order");
+    }
+
+    @Bean
+    public Queue orderB() {
+        Map<String, Object> map = new HashMap<>();
+        //5000单位毫秒，表示5秒后过期
+        map.put("x-msg-t1", 5000);
+        return new Queue("order.B", true, false, false, map);
+    }
+
+    //一个交换机可以绑定多个队列
+    @Bean
+        //Binding bindingOrderA(DirectExchange directExchange, Queue orderA){
+    Binding bindingOrderB(@Qualifier("directExchange") DirectExchange direct, Queue orderB) {
+        return BindingBuilder.bind(orderB).to(direct).with("orderB"); //routingKey也是路由键
     }
 }
