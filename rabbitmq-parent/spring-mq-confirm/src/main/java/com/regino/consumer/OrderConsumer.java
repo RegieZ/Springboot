@@ -34,9 +34,12 @@ public class OrderConsumer {
             //为了测试限流所以模拟休息5秒
             Thread.sleep(5000);
             log.info("下单消息: {}", msg); //{}表示占位符，多个占位符后面可以加多个逗号隔开
-            //调用ack发送消息确认信息将消息从队列中移除，multiple代表是否批量删除
+            //调用basicAck给mq发送消息确认信息将消息从队列中移除
+            //multiple代表是否批量删除，设置为true可能会引起逻辑错误
+            //注意：开启manual手动确认后，删除basicAck和basicNack会使消息无法删除
             channel.basicAck(deliveryTag, false);
         } catch (Exception e) {//消息消费失败
+            //使用basicNack来操作是否重回队列
             if (redeliveryTag) {
                 try {
                     log.info("消费重回过队列，且再次消费失败，将其移除");
@@ -46,7 +49,8 @@ public class OrderConsumer {
                 }
             } else {
                 try {
-                    //调用basicNack，参数3（requeue）标识是否重回队列，
+                    //调用basicNack，参数3（requeue）标识是否重回队列
+                    //队列是先进先出，所以是排到末尾
                     channel.basicNack(deliveryTag, false, true);
                 } catch (IOException e2) {
                     e2.printStackTrace();

@@ -57,7 +57,7 @@ public class QueueBean {
     public Queue orderB() {
         Map<String, Object> map = new HashMap<>();
         //5000单位毫秒，表示5秒后过期
-        map.put("x-message-tt1", 5000);
+        map.put("x-message-ttl", 5000);
         //过期后发送到死信交换机，然后根据routingKey录入到死信队列中
         //队列一旦创建后不可以修改，使用的orderB队列做了修改，所以需要在RabbitMQ中删除orderB重新创建
         //设置死信交换机

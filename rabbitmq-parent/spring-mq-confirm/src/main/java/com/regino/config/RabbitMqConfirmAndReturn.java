@@ -31,6 +31,7 @@ public class RabbitMqConfirmAndReturn implements RabbitTemplate.ConfirmCallback,
     //确认：确认消息是否到达交换机
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+        //可以研究CorrelationData对象获取之前发送消息体、路由键、交换机
         if (ack) { //ack=true，表示消息到达交换机
             log.info("消息到达交换机，ack: {}", ack);
         } else {
@@ -41,6 +42,7 @@ public class RabbitMqConfirmAndReturn implements RabbitTemplate.ConfirmCallback,
     //回退：确认消息是否达到队列，只有在消息没有从交换机路由至队列时此方法回调
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
+        //可以研究Message对象获取之前发送消息体、路由键、交换机
         log.error("消息从交换机路由至队列失败，replyCode: {}，replyText: {}，exchange: {}，routingKey: {}",
                 replyCode, replyText, exchange, routingKey);
     }
