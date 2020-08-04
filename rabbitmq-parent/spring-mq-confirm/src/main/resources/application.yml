@@ -1,7 +1,9 @@
 spring:
   rabbitmq:
-    host: 192.168.200.132
-    port: 5672
+    #host: 192.168.200.132
+    #port: 5672
+    #rabbitmq集群
+    addresses: 192.168.200.132:5672,192.168.200.132:5673,192.168.200.132:5674
     username: guest
     password: guest
     virtual-host: /
